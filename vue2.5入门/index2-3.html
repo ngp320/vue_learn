@@ -10,25 +10,47 @@
 </head>
 
 <body>
+  <!-- 
 
+2-3 4.40s  ..... 
+
+
+ -->
   <div id="root">
     <!-- 插值 表达式 -->
-    <h1>hello {{number}}</h1>
+    <h1>{{number}}</h1>
+    <!-- v-text显示number的内容.(会转义) 等价于 <h1>{{number}}</h1> -->
+    <h1 v-text="number"></h1>
+    <div v-text="content"></div>
+    <!-- v-html显示content的内容(不会转义)  -->
+    <div v-html="content"></div>
+    <!-- v-on:绑定一个click事件 -->
+    <div v-on:click="handleClick" v-html="change"></div>
+    <div v-on:click="handleClick">{{change}}</div>
+    <div @click="handleClick">{{change}}</div>
   </div>
   <script>
     new Vue({
-      el: "#root", 
+      el: "#root",
       // 数据项, 可以配置任意的数据名字
       data: {
         msg: "hello world",
-        number: 123
-
+        number: 123,
+        content: "<h1>hello</h1>",
+        change: " change ",
+      },
+      methods: {
+        handleClick: function () {
+          // alert(123)
+          // 面向dom编程-->面向数据编程. 当数据改变, 页面就跟着改变了
+          this.change = "world"
+        }
       }
+
     })
     // 以前的操作
     // var dom = document.getElementById("root")
     // dom.innerHTML = "hello world 2"
-
   </script>
 </body>
 
