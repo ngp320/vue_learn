@@ -5,17 +5,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vue入门</title>
+  <title> 2-3 数据, 事件, 方法</title>
   <script src="./vue.js"></script>
 </head>
 
 <body>
-  <!-- 
-
-2-3 4.40s  ..... 
-
-
- -->
   <div id="root">
     <!-- 插值 表达式 -->
     <h1>{{number}}</h1>
@@ -27,6 +21,7 @@
     <!-- v-on:绑定一个click事件 -->
     <div v-on:click="handleClick" v-html="change"></div>
     <div v-on:click="handleClick">{{change}}</div>
+    <!-- v-on: 等价于 @ -->
     <div @click="handleClick">{{change}}</div>
   </div>
   <script>
@@ -48,9 +43,6 @@
       }
 
     })
-    // 以前的操作
-    // var dom = document.getElementById("root")
-    // dom.innerHTML = "hello world 2"
   </script>
 </body>
 

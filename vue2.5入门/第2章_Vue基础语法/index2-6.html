@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> 2-6 v-if, v-show, v-for指令</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <!-- v-if 当show为true时显示, 否则删除 -->
+    <div v-if="show">v-if</div>
+    <!-- v-show 当show为true时显示, 否则 添加 style="display: none;"属性 -->
+    <div v-show="show">v-show</div>
+    <div @click="handleClick">toggle</div>
+    <ul>
+      <!-- 循环list数据项, 每个数据项放到item里去, 并输出 -->
+      <!-- :key 属性, 提升渲染效率/性能, 但要求每个key值每次循环都不同, 所以微调↓↓↓ -->
+      <!-- <li v-for="item of list" :key="item">{{item}}</li> -->
+      <!-- 使用index不是特别好的选择, 此种情况下, 列表渲染之后, 不需要排序等, 所以暂用index也行 -->
+      <!-- 当频繁对列表变更的时候, index时候会出现问题的. -->
+      <li v-for="(item, index) of list" :key="index">{{item}}</li>
+    </ul>
+  </div>
+  <script>
+    new Vue({
+      el: "#root",
+      data: {
+        show: true,
+        list: [1,2,3,1]
+      },
+      methods: {
+        handleClick: function () {
+          this.show = !this.show
+        }
+      }
+
+    })
+  </script>
+</body>
+
+</html>

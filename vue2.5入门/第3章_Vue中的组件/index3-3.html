@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 3-3 组件与实例的关系 </title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+<div id="root">
+    <input v-model="inputValue"></input>
+    <button @click="handleSubmit">提交</button>
+    <ul>
+        <li>
+            <todo-item
+                    v-for="(item, index) of list"
+                    :key="index "
+                    :content="item"
+            ></todo-item>
+        </li>
+    </ul>
+</div>
+
+<script>
+    //全局组件
+    //组件不能直接使用content属性, 需要接收属性 props: ['content'],
+    Vue.component('todo-item', {
+        props: ['content'],
+        template: '<li @click="handleClick">{{content}}</li>',
+        methods: {
+            handleClick: function () {
+                alert("clicked")
+            }
+        }
+    })
+
+    new Vue({
+        el: "#root",
+        // 如果不定义模版, Vue实例则找到挂载点 #root, 并将其当做模版使用
+        // //Vue实例 注册 局部组件
+        // components: {
+        //   'todo-item': TodoItem
+        // },
+        data: {
+            inputValue: '',
+            list: []
+        },
+        methods: {
+            handleSubmit: function () {
+                this.list.push(this.inputValue)
+            }
+        }
+
+    })
+</script>
+</body>
+
+</html>
