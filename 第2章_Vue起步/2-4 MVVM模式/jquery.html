@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList Jquery MVP设计模式</title>
+    <script src="jquery-1.11.0.min.js"></script>
+</head>
+<body>
+<div>
+    <input id="input" type="text"></input>
+    <button id="btn">提交</button>
+    <ul id="ul"></ul>
+</div>
+<script>
+    function Page() {
+    }
+
+    $.extend(Page.prototype, {
+        init: function () {
+            this.bindEvents()
+        },
+        bindEvents: function () {
+            var btn = $('#btn');
+            btn.on('click', $.proxy(this.handleBtnClick, this))
+        },
+        handleBtnClick: function () {
+            // alert('123');
+          var inputElem = $('#input');
+          var inputValue = inputElem.val();
+          var ulElem = $('#ul')
+          ulElem.append('<li>'+inputValue+'</li>')
+          $('#list').append(inputValue);
+          inputElem.val('');
+        }
+    })
+    var page = new Page();
+    page.init();
+    // MVP  的设计模式...
+    // jQuery的M层非常弱, 因为没有用ajax去获取远程数据
+    // V层, 就是dom
+    // P层, Presenter 控制器, 控制器会, 通过M层, 来改变V层
+
+    //在写大型项目的时候, 如果使用jQuery, 70%~80%的时间都在操作dom.
+    //对比MVP设计模式, 我们使用MVVM这种设计模式的时候, 代码是怎么编写的呢.
+</script>
+</body>
+</html>

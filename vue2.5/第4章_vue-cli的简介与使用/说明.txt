@@ -1,0 +1,33 @@
+## 1 安装
+
+###安装vue之前需要安装vs2019(可通过360软件管家)配置好C++桌面环境(或者安装后 工具-->工具.. 再配置C++桌面环境)
+###全局安装vue-cli
+npm install --global vue-cli
+###创建一个基于webpack 模板的新项目
+vue init webpack todolist
+###安装依赖，走你
+cd todolist
+npm run dev
+
+===================================
+配置如下, 具体说明还是要看 视频 https://www.imooc.com/video/16985
+latest:
+2.9.3
+installed: 2.8.2
+Project name todolist
+Project description A Vue.js project .
+Author .......
+Vue build standalone
+Install vue-router? No
+Use ESLint to lint your code? Yes
+Pick an ESLint preset Standard
+Set up unit tests No
+Setup e2e tests with Nightwatch? No
+Should we run、 npm install” for you after the project has been created? (rec
+ommended ) npm
+vue-cli●Generated "todolist" .
+# Installing project dependencies . ..
+========================
+
+## 2 使用
+主要是编写 src 目录下的内容
