@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3-8 Vue中的列表渲染</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 以index为key值时, 如果频繁操作dom元素数据时,其实还是比较费性能, 会让Vue无法复用dom节点  -->
+    <!-- <div v-for="(item, index) of list" key="index"> -->
+    <!-- key值 提高性能, key唯一 且 不会频繁增删 -->
+    <div v-for="(item, index) of list" :key="item.id">
+      {{item.text}} --- {{index}}
+    </div>
+  </div>
+
+  <script>
+    // 如果要在 chrome 的 console里, 通过vm.list[4]下标改变 是不能的, 如果要 改变 list并刷新到View, 
+    // 则需要使用其内置方法如下, 或者直接 改为 新的引用, vm.list = [{id: "1848",text: "___ngp___"} ]
+    // push pop shift unshift splice sort reverse
+    // splice( pos, mode, content)
+    //① 位置, 下标0开始
+    //② 1替换0插入
+    //③ 内容, 例如: {id: "2021070702",text: "ngp1"} 
+    //unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。
+    //shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        // list一般不是写死的数组, 而是后端把数据返回给前端
+        // list: ["hello", "ngp", "nice", "to", "meet", "you"]
+        list: [{
+          id: "2021070701",
+          text: "hello"
+        }, {
+          id: "2021070702",
+          text: "ngp1"
+        }, {
+          id: "2021070703",
+          text: "!"
+        }]
+      },
+      methods: {
+      }
+    })
+
+  </script>
+</body>
+
+</html>

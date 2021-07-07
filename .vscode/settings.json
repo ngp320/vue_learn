@@ -1,19 +1,31 @@
 {
+  // eslint
+  "eslint.autoFixOnSave": true,
   //prettier的配置
+  "prettier.eslintIntegration": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode", // 设置 javascript 的默认格式化工具为 prettier
   "editor.formatOnSave": true,
   "prettier.requireConfig": true,
-  "prettier.configPath": ".prettierrc.js",
+  "prettier.configPath": ".prettierrc.yaml",
 
-  "prettier.tabWidth": 4, //缩进字节数
-  "editor.tabSize": 4,
+  //缩进###############################
+  "prettier.tabWidth": 2, //缩进字节数
+  "editor.tabSize": 2,
   "prettier.useTabs": false, //，缩进不使用tab,使用空格
+  //缩进###############################
+
   "prettier.semi": true, //.句尾添加分号
   "prettier.singleQuote": true, //使用单引号代替双引号
 
-
+  //其他
   // 打开代码片段填空时的智能感知
   "editor.suggest.snippetsPreventQuickSuggestions": false,
   //
   "breadcrumbs.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
 }

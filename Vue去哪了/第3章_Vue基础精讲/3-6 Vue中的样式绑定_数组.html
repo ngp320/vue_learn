@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3-6 Vue中的样式绑定_数组</title>
+  <script src="../vue.js"></script>
+  <style>
+    /*  方式1 方式2  */
+    .activated {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 方式2 class数组绑定 -->
+    <div @click="handleDivClick" :class="[activated, activatedOne]">
+      Hello world</div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        // <!-- 方式2 class数组绑定 -->
+        activated: "",
+        activated: "activated-one",
+      },
+      methods: {
+        handleDivClick: function () {
+
+          // <!-- 方式2 class数组绑定 -->
+          // if (this.activated === "activated") {
+          //   console.log("1")
+          //   this.activated = "";
+          // } else {
+          //   console.log("2")
+          //   // 当你点击的时候, 显示的是 activated 这个变量,而activated变量在点击后变成了 activated 字符串
+          //   this.activated = "activated"
+          // }
+          // 三元表达式简化
+          this.activated = this.activated === "" ? "activated" : "";
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

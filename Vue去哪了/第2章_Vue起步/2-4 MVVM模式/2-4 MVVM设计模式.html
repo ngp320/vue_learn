@@ -2,67 +2,67 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>todolist Vue MVVM设计模式 </title>
-    <script src="../vue.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>todolist Vue MVVM设计模式 </title>
+  <script src="../vue.js"></script>
 </head>
 
 <body>
-<div id="app">
-    <input v-model="inputValue" ></input>
+  <div id="app">
+    <input v-model="inputValue"></input>
     <button @click="handleSubmit">提交</button>
     <ul>
-        <li v-for="(item, index) of list" :key="index">
-            {{item}}
-        </li>
+      <li v-for="(item, index) of list" :key="index">
+        {{item}}
+      </li>
     </ul>
-</div>
-<script>
+  </div>
+  <script>
 
-  /*
-    见同目录下  MVVM设计模式_图示.png
+    /*
+      见同目录下  MVVM设计模式_图示.png
 
-    MVVM
-    M层
-    V层
-    VM层, 是Vue实现的, Model层变了, Vue会帮你去改变 View层
+      MVVM
+      M层
+      V层
+      VM层, 是Vue实现的, Model层变了, Vue会帮你去改变 View层
 
-    做开放框架的时候, 最重的一层是M层, 所以我们需要把注意力都集中到M层的开发之上.
+      做开放框架的时候, 最重的一层是M层, 所以我们需要把注意力都集中到M层的开发之上.
 
-    以前, 当我们使用Jquery开发代码的时候, 我们是在面向dom进行开发.
-    现在,  当我们使用MVVM方式开发的时候, 我们是面向数据, 在进行编程.
+      以前, 当我们使用Jquery开发代码的时候, 我们是在面向dom进行开发.
+      现在,  当我们使用MVVM方式开发的时候, 我们是面向数据, 在进行编程.
 
-    如果使用MVP方式开发, 代码里面会有很多关于dom操作.
-    而使用MVVM方式开发, dom的操作被极大的简化了,
-    也就是在大型项目中使用Vue开发, 代码数量会有显著的减少.
-    至少可以减少30%的代码量, 多的甚至可以减少70%的代码.
+      如果使用MVP方式开发, 代码里面会有很多关于dom操作.
+      而使用MVVM方式开发, dom的操作被极大的简化了,
+      也就是在大型项目中使用Vue开发, 代码数量会有显著的减少.
+      至少可以减少30%的代码量, 多的甚至可以减少70%的代码.
 
-    回过头来, 我们在回到ppt(MVVM设计模式_图示.png),
-    Vue是怎么知道数据改变了, Vue又是怎么改变的视图呢?
-    这就涉及到Vue的源码之中的实现了, Vue用到了es5里面比较核心的一个api-->object define property
-    同时, Vue引入了虚拟dom的机制,
-    通过 虚拟dom 和 object define property , Vue实现了VM层的架构体系.
-    大家课后要是有兴趣, 可以去看看... 虚拟dom 和 object define property
-    */
+      回过头来, 我们在回到ppt(MVVM设计模式_图示.png),
+      Vue是怎么知道数据改变了, Vue又是怎么改变的视图呢?
+      这就涉及到Vue的源码之中的实现了, Vue用到了es5里面比较核心的一个api-->object define property
+      同时, Vue引入了虚拟dom的机制,
+      通过 虚拟dom 和 object define property , Vue实现了VM层的架构体系.
+      大家课后要是有兴趣, 可以去看看... 虚拟dom 和 object define property
+      */
 
     new Vue({
-        el: "#app",
-        data: {
-            list: [],
-            inputValue: ''
-        },
-        methods: {
-            handleSubmit: function () {
-                // 给list数组添加内容
-                this.list.push(this.inputValue)
+      el: "#app",
+      data: {
+        list: [],
+        inputValue: ''
+      },
+      methods: {
+        handleSubmit: function () {
+          // 给list数组添加内容
+          this.list.push(this.inputValue)
 
-            }
         }
+      }
 
     })
-</script>
+  </script>
 </body>
 
 </html>

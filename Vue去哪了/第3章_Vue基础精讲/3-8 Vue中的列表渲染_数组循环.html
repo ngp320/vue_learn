@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3-8 Vue中的列表渲染_数组循环</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 1代 -->
+    <!-- <div v-for="(item, index) of list" :key="item.id">
+      {{item.text}} --- {{index}}
+    </div>
+    <span v-for="(item, index) of list" :key="item.id">
+      {{item.text}}
+    </span> -->
+
+    <!-- 2代 两次循环 写成 一次循环-->
+    <!-- <div v-for="(item, index) of list" :key="item.id">
+      <div>
+        {{item.text}} --- {{index}}
+      </div>
+      <span>
+        {{item.text}}
+      </span>
+    </div> -->
+
+    <!-- 3代 去掉外层多余div -->
+    <!-- 但会报错 不能用 :key="item.id" -->
+    <template v-for="(item, index) of list">
+      <div>
+        {{item.text}} --- {{index}}
+      </div>
+      <span>
+        {{item.text}}
+      </span>
+    </template>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        // list一般不是写死的数组, 而是后端把数据返回给前端
+        // list: ["hello", "ngp", "nice", "to", "meet", "you"]
+        list: [{
+          id: "2021070701",
+          text: "hello"
+        }, {
+          id: "2021070702",
+          text: "ngp1"
+        }, {
+          id: "2021070703",
+          text: "!"
+        }]
+      },
+      methods: {
+      }
+    })
+
+  </script>
+</body>
+
+</html>

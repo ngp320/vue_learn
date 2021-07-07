@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3-7 Vue中的条件渲染v-if</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- v-if为false时, 整个标签不存在-->
+    <div data-test="v-if" v-if="show">{{message}}</div>
+    <!-- v-show为false时, 只是display:none -->
+    <!-- 需要频繁的添加删除的时候, v-show效率更高, 因为不会频繁把页面上的dom删除添加 -->
+    <div data-test="v-show" v-show="show">{{message}}</div>
+    <div>---------- 更复杂的使用 ---------- </div>
+    <div v-if="show">{{message}}1</div>
+    <div v-if="show">{{message}}2</div>
+    <!-- v-if 和 v-else要紧贴着使用, 如果中间有其他标签则会报错 -->
+    <div v-else="show">Bye World</div>
+    <div v-else="show">123</div>
+    <div>---------- if else-if else的使用 ---------- </div>
+    <!-- v-if v-else-if和 v-else 也要紧贴着使用, 同上-->
+    <!-- chrome的console里输入 vm.show == 'b' 来测试 -->
+    <div v-if="show === 'a'">This is A</div>
+    <div v-else-if="show === 'b'">This is B</div>
+    <div v-else>This is Others</div>
+    <div>---------- 一个邮箱例子 ---------- </div>
+    <div v-if="show === 'a'">
+      用户名<input key="username" />
+    </div>
+    <div v-else>
+      <!-- Vue会复用input, 不会帮忙清空内容. 通过给input添加key值, 可清空内容-->
+      邮箱名<input key="password" />
+    </div>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        show: false,
+        message: "Hello World"
+      },
+      methods: {
+      }
+    })
+
+  </script>
+</body>
+
+</html>

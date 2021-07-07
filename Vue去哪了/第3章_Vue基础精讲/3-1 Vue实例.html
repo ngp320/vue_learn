@@ -2,42 +2,42 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue</title>
-    <script src="../vue.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue</title>
+  <script src="../vue.js"></script>
 </head>
 
 <body>
-    <!-- <div id="root" v-on:click="handleClick"> -->
-    <div id="root">
-        <div @click="handleClick">
-            {{message}}
-        </div>
-        <item></item>
+  <!-- <div id="root" v-on:click="handleClick"> -->
+  <div id="root">
+    <div @click="handleClick">
+      {{message}}
     </div>
-    <script>
-        Vue.component('item', {
-            template: '<div>hellow world 全局组件<div>'
-        })
-        // Vue的官方文档上, 大家经常会看见vm变量, 它指的一般都是Vue的实例
-        var vm = new Vue({
-            el: '#root',
-            data: {
-                message: 'hello world'
-            },
-            methods: {
-                handleClick: function () {
-                    alert("123");
-                }
-            },
-            // props 
-            // computed
-            // watch
-        })
+    <item></item>
+  </div>
+  <script>
+    Vue.component('item', {
+      template: '<div>hellow world 全局组件<div>'
+    })
+    // Vue的官方文档上, 大家经常会看见vm变量, 它指的一般都是Vue的实例
+    var vm = new Vue({
+      el: '#root',
+      data: {
+        message: 'hello world'
+      },
+      methods: {
+        handleClick: function () {
+          alert("123");
+        }
+      },
+      // props 
+      // computed
+      // watch
+    })
 
-    </script>
+  </script>
 </body>
 
 </html>
