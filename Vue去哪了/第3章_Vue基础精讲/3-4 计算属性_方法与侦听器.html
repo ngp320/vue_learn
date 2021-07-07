@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-4 计算属性_方法与侦听器</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- {{fullName()}} -->
+        <!-- {{fullName}}  -->
+        {{fullName}}
+        {{age}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                firstName: "NGP",
+                lastName: "8264",
+                // fullName: "ngp 1848",
+                age: 28
+            },
+            // // {{fullName}}   // data:{ ... fullName: "ngp 1848",}
+            // // 使用watch 和 计算属性很相似, 它有一个缓存
+            // // 但watch的实现比computed实现 代码简单很多. 如无必要勿增实体
+            // watch: {
+            //   firstName: function () {
+            //     console.log("watch--计算了一次")
+            //     this.fullName = this.firstName + " " + this.lastName;
+            //   },
+            //   lastName: function () {
+            //     console.log("watch--计算了一次")
+            //     this.fullName = this.firstName + " " + this.lastName;
+            //   }
+            // }
+
+            //   // 用方法, 实现计算属性同样的功能   {{fullName()}}
+            // methods: {
+            //   // 但是方法,这种编写方式, 是不如计算属性有效的. 没有缓存
+            //   // 修改age, 不会使用fullName的缓存, 会重新计算一遍
+            //   fullName: function () {
+            //     console.log("方法--计算了一次")
+            //     return this.firstName + " " + this.lastName
+            //   }
+            // }
+
+            // 计算属性 (有一种缓存的概念在里边) {{fullName}}
+            // 当它依赖的属性没有任何的变化的时候, fullname就不会重新计算, 它会一直用上一次计算的的结果, 这样的话会提高一些性能
+            computed: {
+                fullName: function () {
+                    console.log("计算属性--计算了一次");
+                    return this.firstName + " " + this.lastName;
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 3-2 todolist组件拆分 </title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+<div id="root">
+    <input v-model="inputValue"></input>
+    <button @click="handleSubmit">提交</button>
+    <ul>
+        <!-- 当list无比庞大时, 就可以拆分成一个组件进行维护 -->
+        <!--通过content把值传入组件-->
+        <li>
+            <todo-item
+                    v-for="(item, index) of list"
+                    :key="index "
+                    :content="item"
+            ></todo-item>
+        </li>
+    </ul>
+</div>
+
+<script>
+    //全局组件
+    //组件不能直接使用content, 需要接收属性 props: ['content'],
+    Vue.component('todo-item', {
+        props: ['content'],
+        template: '<li>{{content}}</li>'
+    })
+
+    // //局部组件
+    // var TodoItem = {
+    //     template: '<li>item</li>'
+    // }
+
+    new Vue({
+        el: "#root",
+        // //Vue实例 注册 局部组件
+        // components: {
+        //   'todo-item': TodoItem
+        // },
+        data: {
+            inputValue: '',
+            list: []
+        },
+        methods: {
+            handleSubmit: function () {
+                // 给list数组添加内容
+                this.list.push(this.inputValue)
+            }
+        }
+
+    })
+</script>
+</body>
+
+</html>

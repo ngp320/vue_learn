@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-5 计算属性的 getter 和 setter</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{fullName}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                firstName: "NGP",
+                lastName: "8264",
+            },
+            computed: {
+                fullName: {
+                    get: function () {
+                        console.log("get了一次");
+                        return this.firstName + " " + this.lastName;
+                    },
+                    set: function (value) {
+                        // 通过chrome的console修改了fullname之后, 
+                        // 由set拆str,再赋值给 firstName和lastName
+                        // 又由于 computed中的函数会 因为其依赖改变 而 重新计算. 所以能更新View
+                        var arr = value.split(" ");
+                        this.firstName = arr[0];
+                        this.lastName = arr[1];
+                        console.log("set了一次 " + value);
+                    }
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 3-3 实现todolist删除功能 </title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+<div id="root">
+    <input v-model="inputValue"></input>
+    <button @click="handleSubmit">提交</button>
+    <ul>
+        <li>
+            <!--父组件, 监听 todo-item子组件的delete事件-->
+            <todo-item
+                    v-for="(item, index) of list"
+                    :key="index "
+                    :content="item"
+                    :index="index"
+                    @delete="handleDelete"
+            ></todo-item>
+        </li>
+    </ul>
+</div>
+
+<script>
+    //全局组件
+    //最外层的 #root 是个父组件, todo-item是个子组件, 通过属性content传递值
+    Vue.component('todo-item', {
+        props: ['content','index'],
+        template: '<li @click="handleClick">{{content}}</li>',
+        methods: {
+            handleClick: function () {
+                // alert("clicked")
+                // 子组件向外触发了一个事件delete, 里面携带了index的值
+                this.$emit('delete',this.index)
+            }
+
+        }
+    })
+
+    new Vue({
+        el: "#root",
+        // //Vue实例 注册 局部组件
+        // components: {
+        //   'todo-item': TodoItem
+        // },
+        data: {
+            inputValue: '',
+            list: []
+        },
+        methods: {
+            handleSubmit: function () {
+                this.list.push(this.inputValue)
+            },
+            handleDelete: function (index) {
+                // alert(index)
+                this.list.splice(index, 1)
+
+            }
+        }
+
+    })
+</script>
+</body>
+
+</html>
