@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue实例生命周期函数</title>
+  <script src="../../vue.js"></script>
+
+</head>
+<body>
+    
+  <div id="app">
+    hello world old
+  </div>
+  <script>
+    //生命周期函数就是vue实例在某一个时间点 会自动执行的函数
+    // Vue官方文档的 生命周期图 https://cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA
+    // 只可视频, 不可文字的.. 一段......
+    var vm = new Vue({
+      el: "#app" ,
+      template: "<div>hello world new - {{test}}</div>",
+      data: {
+        test: "test",
+      },
+      beforeCreate:function () {
+        console.log(this.$el)
+        console.log("beforeCreate")
+      },
+      created:function(){
+        console.log(this.$el)
+        console.log("created")
+      },
+      beforeMount:function(){
+        console.log(this.$el)
+        console.log("beforeMount")
+      },
+      mounted:function(){
+        console.log(this.$el)
+        console.log("mounted")
+      },
+      // beforeDestroy 和 destroyed, 仅在vm销毁时, 被调用. 在chrome控制台 vm.$destory() 触发
+      beforeDestroy:function(){
+        console.log(this.$el)
+        console.log("beforeDestroy")
+      },
+      destroyed:function(){
+        console.log(this.$el)
+        console.log("destroyed")
+      },
+      // beforeUpdate 和 updated, 仅在更新时执行
+      beforeUpdate:function(){
+        console.log(this.$el)
+        console.log("beforeupdate")
+      },
+      updated:function(){
+        console.log(this.$el)
+        console.log("updated")
+      }
+    });
+  </script>
+</body>
+</html>

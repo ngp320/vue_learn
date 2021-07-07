@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模版语法</title>
+  <script src="../../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 模版语法1 插值表达式 -->
+    {{name + ' th'}}
+    <!-- 模版语法2 v-text显示number的内容.(会转义) 等价于 <h1>{{number}}</h1> -->
+    <!-- 凡是v-... 都是一个js表达式,  -->
+    <div v-text="name+ ' th'"></div>
+    <!-- 模版语法3 v-html显示content的内容(不会转义)  -->
+    <div v-html="name+ ' th'"></div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        name: "NGP",
+      },
+    })
+  </script>
+</body>
+
+</html>
