@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3-11 (新)Vue中的表单绑定</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <input v-model="value" /> -->
+    <!-- <textarea v-model="value"></textarea> -->
+    <!-- <input type="checkbox" v-model="value" /> -->
+    <!-- <input type="radio" value="test" v-model="value" /> -->
+    <!-- {{value}} -->
+
+    <!-- option 如果没有 value, 则select的v-model="value" 会指向 其内容 </br>
+    <select v-model="value">
+      <option>A</option>
+      <option value="2">B</option>
+      <option value="3">C</option>
+    </select>
+    {{value}} -->
+
+    <!-- v-model.lazy 失去焦点时, 获取内容</br>
+    <input type="text" v-model.lazy="value" />
+    {{value}} -->
+
+    <!-- v-model.number 如果是数字, 则转换成数字类型, 再填入value</br>
+    <input type="text" v-model.number="value" />
+    {{value}} -->
+
+    v-model.trim 去掉首尾空格, 再填入value</br>
+    <input type="text" v-model.trim="value" />
+    {{value}}
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        value: ""
+      },
+      methods: {
+        handleClick: function (e, one, two, three) {
+          console.log(e, one, two, three)
+        }
+      },
+      watch: {
+        // 当value改变时, 输出value类型
+        value: function () {
+          console.log(typeof this.value)
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

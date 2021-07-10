@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3-9 Vue中的set方法</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 
+      Vue中，对象和数组在某些情况下无法触发响应式数据更新。
+      为了解决上面的问题，Vue给出了两个Api，分别是Vue.set和vm.$set
+
+      userInfo添加内容的方法
+      Vue.set(vm.userInfo, "male","male")
+      vm.$set(vm.userInfo, "name","name")
+
+      userInfo添加内容的方法
+      Vue.set(vm.userInfo, 0 ,"set00")
+      vm.$set(vm.userInfo, 1,"$set11")
+      
+      这两个API的区别是Vue.set是定义在构造函数上的，而vm.$set是定义在原型对象上的。
+      
+    -->
+    <div v-for="(item, key, index) of userInfo" :key="item.id">
+      {{item}} -- {{key}} -- {{index}}
+    </div>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+
+        userInfo: {
+          name: "ngp",
+          age: 28,
+          gender: "male",
+          salary: "secret",
+        }
+      },
+      methods: {
+      }
+    })
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3-10 (新)Vue中的事件绑定</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 触发点击事件  传入 handleClick: function (e)  的 e内容
+      MouseEvent {isTrusted: true, screenX: 301, screenY: 172, clientX: 30, clientY: 14, …}
+    -->
+    <!-- <button @click="handleClick">Button</button> -->
+
+    <!-- handleClick 变为 handleClick()后 →→→ MouseEvent... 变为 undefined -->
+    <button @click="handleClick()">Button</button>
+    <!-- 再加上 Vue内置方法$event, 即可重新 显示 MouseEvent-->
+    <button @click="handleClick($event)">Button($event)</button>
+    <!-- 此时可以传一些额外参数 -->
+    <button @click="handleClick($event, 1, 2, 3)">Button($event, 1, 2, 3)</button>
+
+
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+      },
+      methods: {
+        handleClick: function (e, one, two, three) {
+          console.log(e, one, two, three)
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3-10 (新)Vue中的事件绑定_阻止提交跳转</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <form action="/abc"> -->
+    <!-- <input type="submit" @click.prevent /> -->
+    <!-- @click.prevent 实现完全一致的功能  -->
+    <!-- <input type="submit" @click="handlePreventClick" /> -->
+    <!-- 事件处理 监听事件 https://cn.vuejs.org/v2/guide/events.html -->
+    <!-- </form> -->
+
+
+    <!-- <div @click.self="handleClick">
+      self要求, click事件只有在e.target=e.currentTarget的时候才会执行
+      nice
+      <div>hello world</div>
+    </div> -->
+
+    <!-- <div @click.once="handleClick">
+      .once handleClick只会绑定一次
+      <div>hello world</div>
+    </div> -->
+
+    <!-- <div @click.capture="handleClickOuter">
+      .capture 遵循捕获的规则(外到内), 而不是冒泡的规则(内到外)
+      <div @click="handleClickInner">hello world</div>
+    </div> -->
+
+    <!-- <input @keydown="handleKeyDown" /> -->
+    <input @keydown.enter="handleKeyDown" v-model="enter_str" />
+    <input @keydown.tab="handleKeyDown" v-model="tab_str" />
+    <input @keydown.delete="handleKeyDown" v-model="delete_str" />
+    <input @keydown.esc="handleKeyDown" v-model="esc_str" />
+    <input @keydown.ctrl="handleKeyDown" v-model="ctrl_str" />
+    <input @keydown.meta="handleKeyDown" v-model="meta_str" />
+
+    <div @click.right="handleConsoleLog">meta right</div>
+    <div @click.left="handleConsoleLog">meta left</div>
+    <div @click.middle="handleConsoleLog">meta middle</div>
+
+
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        enter_str: "enter",
+        tab_str: "tab",
+        delete_str: "delete",
+        esc_str: "esc",
+        ctrl_str: "ctrl",
+        meta_str: "meta win",
+      },
+      methods: {
+        handleClick: function () {
+          alert(123)
+        },
+        handleClickInner: function () {
+          alert("inner")
+        },
+        handleClickOuter: function () {
+          alert("outer")
+        },
+        handleKeyDown: function (e) {
+          console.log(e.target.value)
+        },
+        handleConsoleLog: function (e) {
+          console.log("console log")
+        }
+        // @click.prevent 实现完全一致的功能   
+        // handlePreventClick: function (e) {
+        //   //阻止提交行为
+        //   e.preventDefault();
+        // }
+      }
+    })
+
+  </script>
+</body>
+
+</html>
