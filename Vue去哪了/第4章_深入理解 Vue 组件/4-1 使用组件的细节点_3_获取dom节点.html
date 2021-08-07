@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4-1 使用组件的细节点_3</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <!--  vue不建议我们在代码里面操作dom, 但是在处理一些及其复杂的动画效果, 
+     不操作dom, 通过数据绑定, 有的时候处理不了这样的情况. 
+     所以在某些情况下, 我们真就得操作dom 
+     ref='hello' 引用名hello -->
+    <div ref='hello' @click="handleClick">
+      hello world
+    </div>
+
+    <counter ref='one' @change="handleChange"></counter>
+    <counter ref='two' @change="handleChange"></counter>
+    <div>total {{total}}</div>
+  </div>
+  <script>
+
+    Vue.component('counter', {
+      template: '<div @click=" handleClick"> {{number}}</div> ',
+      //data 在子组件里定义时, 只能是一个函数, 而不能直接定义
+      // 之所以这么设计, 是因为 子组件可能不止在一个地方被调用
+      // 我们希望每一个子组件不和其他的数据产生冲突
+      data: function () {
+        return {
+          number: 0
+        }
+      },
+      methods: {
+        handleClick: function () {
+          this.number++
+          // 子组件 向 父组件 传值
+          this.$emit('change')
+        }
+      }
+    })
+
+    var vm = new Vue({
+      el: '#root',
+      data: {
+        total: 0,
+      },
+      methods: {
+        handleClick: function () {
+          // alert('click')
+          // this.$refs.ref //所有引用
+          console.log(this.$refs.hello)
+        },
+        handleChange: function () {
+          // div标签上的 ref可以获取 dom元素
+          // 组件上 ref 获取的是 所有组件的引用
+          this.total = this.$refs.one.number + this.$refs.two.number
+          console.log(this.$refs.one)
+          console.log(this.$refs.two)
+          console.log(this.$refs.one.number)
+          console.log(this.$refs.two.number)
+          console.log("change")
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

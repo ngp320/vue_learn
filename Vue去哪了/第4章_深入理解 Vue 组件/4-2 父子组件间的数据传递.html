@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4-2 父子组件间的数据传递</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <!-- :propsName="msg" 子组件向父组件传值 -->
+    <counter :count="0"></counter>
+    <counter :count="1"></counter>
+  </div>
+
+
+  <script>
+
+    var counter = {
+      props: ['count'],
+      template: '<div @handleCLick>{{count}}</div>',
+    }
+
+    var vm = new Vue({
+      el: '#root',
+      components: {
+        counter: counter
+      },
+      methods: {
+        handleCLick: function (
+        ) {
+          this.count++
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

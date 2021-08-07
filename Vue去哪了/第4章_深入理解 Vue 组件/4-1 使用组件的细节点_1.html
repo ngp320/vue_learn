@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4-1 使用组件的细节点_1</title>
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <table>
+      <tbody>
+        <!-- 
+          h5的规范里面, table里放tbody, tbody里放tr, 
+          现在我们使用子组件, 写成了row
+          所以就会出问题. 
+          解决: 使用vue的is属性
+
+         -->
+        <!-- <row> </row> -->
+        <!-- <row> </row> -->
+        <tr is="row"> </tr>
+        <tr is="row"> </tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li is="row"></li>
+      <li is="row"></li>
+    </ul>
+
+    <ol>
+      <li is="row"></li>
+      <li is="row"></li>
+    </ol>
+
+    <select>
+      <option is="row"></option>
+    </select>
+
+  </div>
+  <script>
+    Vue.component('row', {
+      template: '<tr> <td>this is a row</td> </tr>'
+    })
+    // Vue的官方文档上, 大家经常会看见vm变量, 它指的一般都是Vue的实例
+    var vm = new Vue({
+      el: '#root',
+      data: {
+      },
+      methods: {
+      }
+    })
+
+  </script>
+</body>
+
+</html>
