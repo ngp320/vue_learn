@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>4-8 (新) 动态组件与v-once指令 </title>
+    <script src="../vue.js"></script>
+  </head>
+
+  <body>
+    <!-- v-once只对内部的组件渲染一次, component就无效了 -->
+    <!--<div id="root" v-once>-->
+    <div id="root">
+      <!--<child-one v-if="type === 'child-one'"></child-one>-->
+      <!--<child-two v-if="type === 'child-two'"></child-two>-->
+      <!--&lt;!&ndash;简化, 动态组件, 动态组件的意思, 就是根据:is里面的数据的变化, 自动加载不同的组件&ndash;&gt;-->
+      <!--<component :is="type"></component>-->
+      <!--<button @click="handleBtnClick">change</button>-->
+    </div>
+
+
+    <script>
+      Vue.component('child-one', {
+        template: '<div>child-one</div>'
+
+      })
+      Vue.component('child-two', {
+        template: '<div>child-two</div>'
+      })
+
+      var vm = new Vue({
+        el: '#root',
+        data: {
+          type: 'child-one'
+        },
+        template: `
+          <div>
+            <child-one v-if="type === 'child-one'"/>
+            <child-two v-if="type === 'child-two'"/>
+            <component :is="type" />
+            <button @click="handleBtnClick">change</button>
+          </div>
+        `,
+        // // v-once 只渲染一次
+        // template: `
+        //   <div v-once>
+        //     <child-one v-if="type === 'child-one'"/>
+        //     <child-two v-if="type === 'child-two'"/>
+        //     <component :is="type" />
+        //     <button @click="handleBtnClick">change</button>
+        //   </div>
+        // `,
+        methods: {
+          handleBtnClick: function () {
+            this.type = (this.type === 'child-one' ?
+              'child-two' : 'child-one')
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>

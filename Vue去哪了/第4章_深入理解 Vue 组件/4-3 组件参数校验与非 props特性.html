@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>4-3 组件参数校验与非 props特性</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <!--// content传递字符串 :content传递数字-->
+      <child content="hello world"></child>
+      <child :content="8023"></child>
+      <child :content="{a:1}"></child>
+      <child ></child>
+      <child content="1234"></child>
+    </div>
+
+    <script>
+      Vue.component('child', {
+        //约束父组件传过来的值, 必须是某种类型
+        // 如果类型不一样, 则会报一个警告
+        // props: ['content'],
+        // props: {
+        //   // content: String
+        //   // content: [String, Number]
+        //   content: {
+        //     type: String,
+        //     // 警告 必传
+        //     required: true,
+        //     default: 'default value',
+        //     validator: function (value) {
+        //       return (value.length > 5)
+        //     }
+        //
+        //
+        //   }
+        // },
+
+        // template: '<div>{{content}}</div>'
+
+        // 非props特性的 特点
+        // 1未接收父组件的传值时, props属性 不能使用
+        // 2未接收父组件的传值时, content的内容会显示在dom里
+
+      })
+
+      var vm = new Vue({
+        el: '#root',
+      })
+
+    </script>
+
+
+  </body>
+</html>

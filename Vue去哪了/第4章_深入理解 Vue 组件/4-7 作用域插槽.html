@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>4-7 作用域插槽</title>
+    <!--当子组件的 循环或者某一部分, 需要由外部传递进来的时候, 我们使用作用域插槽-->
+    <script src="../vue.js"></script>
+  </head>
+
+  <body>
+    <div id="root">
+      <child>
+        <!--<template> 标准写法, 告诉子组件, 怎么显示列表中的每一项-->
+        <!--传给子组件的 item保存在slot-scope="props"的props中 -->
+        <!-- 父组件 给 子组件, 传递模版, 决定显示效果 -->
+        <template slot-scope="props">
+          <!--<li>{{props.item}}</li>-->
+          <h1>{{props.item}}</h1>
+        </template>
+      </child>
+    </div>
+
+
+    <script>
+
+      Vue.component('child', {
+        // template: `
+        //   <div>
+        //     <ul>
+        //       <li v-for="item of list">
+        //         {{item}}
+        //       </li>
+        //     </ul>
+        //   </div>`,
+        // 希望 list怎么循环, 由外部定义
+        template: `
+          <div>
+            <ul>
+              <slot  v-for="item of list" :item=item >
+              </slot>
+            </ul>
+          </div>`,
+        data: function () {
+          return {
+            list: [1, 2, 3, 4]
+          }
+        },
+      })
+
+      //插槽方式
+      var vm = new Vue({
+        el: '#root',
+      })
+    </script>
+  </body>
+
+</html>

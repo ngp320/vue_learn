@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>4-6 在Vue中使用插槽</title>
+    <script src="../vue.js"></script>
+    <!-- 起因: https://gitee.com/ngp320/pic/tree/master/vue/vue_component_complex_%E4%BC%A0%E5%80%BC.png -->
+  </head>
+
+  <body>
+    <!--<div id="root">-->
+    <!--  <child content="<p>Dell</p>"></child>-->
+    <!--</div>-->
+
+    <!--插槽方式-->
+    <!--<child id="root">-->
+    <!--  <h1>Dell</h1>-->
+    <!--</child>-->
+
+    <body-content id="root">
+      <!--<div class="header" slot="header">header</div>-->
+      <div class="footer" slot="footer">footer</div>
+    </body-content>
+
+    <script>
+      // Vue.component('child', {
+      //   props: ['content'],
+      //   template: '<div>' +
+      //     '<p>hello</p>' +
+      //     //传入的p标签 会被转义
+      //     // '<div>{{content}}</div>' +
+      //     //这么写, 外层会多出一个div标签 (template模版占位符不好用)
+      //     //而且, 传递多个内容时, 代码难以阅读
+      //     '<div v-html="this.content"></div>' +
+      //     '</div>',
+      // })
+
+      // Vue.component('child', {
+      // props: ['content'],
+      // template: '<div>' +
+      //   '<p>hello</p>' +
+      //   //slot新特性: 默认值
+      //   '<slot>默认值</slot>' +
+      //   '</div>',
+      //
+      // })
+
+
+      Vue.component('body-content', {
+        props: ['content'],
+        template: '<div>' +
+          //slot聚名插槽, 默认插槽
+          '<slot name="header" >' +
+          '<h3>default header</h3>' +
+          '</slot>' +
+          '<div class="content">content</div>' +
+          '<slot name="footer"></slot>' +
+          '</div>',
+      })
+
+      //插槽方式
+      var vm = new Vue({
+        el: '#root',
+      })
+    </script>
+  </body>
+
+</html>
