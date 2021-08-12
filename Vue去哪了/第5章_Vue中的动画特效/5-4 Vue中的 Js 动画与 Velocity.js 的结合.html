@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>5-4 Vue中的 Js 动画与 Velocity.js 的结合</title>
+    <script src="../vue.js"></script>
+
+    <!-- http://velocityjs.org/ -->
+    <script src="../velocity.min.js"></script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <transition
+        name="fadename"
+        @before-enter = "heandleBeforeEnter"
+        @enter="handleEnter"
+        @after-enter = "heandleAfterEnter"
+      >
+        <div v-if="show">hello world</div>
+      </transition>
+      <button @click="handleClick">切换</button>
+    </div>
+
+
+    <script>
+      var vm = new Vue({
+        el: '#root',
+        data: {
+
+          show: true,
+        },
+
+
+        methods: {
+          // velocity实现
+          handleClick: function () {
+            this.show = !this.show;
+          },
+          heandleBeforeEnter: function (el) {
+            el.style.opacity = 0;
+          },
+          handleEnter: function (el, done) {
+            //从0->1耗时1000ms
+            Velocity(el, {opacity:1}, {
+              duration: 1000,
+              // complete表示Velocity结束后执行 done
+              complete: done
+            })
+          },
+          heandleAfterEnter: function (el) {
+            alert('动画结束')
+          }
+
+          //js钩子 实现入场动画
+          // handleClick: function () {
+          //   this.show = !this.show;
+          // },
+          // heandleBeforeEnter: function (el) {
+          //   // console.log('before-enter');
+          //   // el是动画包裹的div标签
+          //   el.style.color = 'red';
+          // },
+          // handleEnter: function (el, done) {
+          //   setTimeout(function () {
+          //     el.style.color = 'green';
+          //   }, 2000)
+          //
+          //   setTimeout(function () {
+          //     //  手动调用 done, 告诉vue, 动画执行完了
+          //     done();
+          //   }, 4000)
+          // },
+          // heandleAfterEnter: function (el) {
+          //   el.style.color = 'blue';
+          // }
+        }
+      });
+    </script>
+  </body>
+
+</html>

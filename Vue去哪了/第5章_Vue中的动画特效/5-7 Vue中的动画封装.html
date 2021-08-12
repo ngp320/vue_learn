@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>5-7 Vue中的动画封装</title>
+    <script src="../vue.js"></script>
+
+  </head>
+  <body>
+    <div id="root">
+      <!-- 父组件show传入子组件 -->
+      <fade :show="show">
+        <div>hello world</div>
+        <h1>hello world</h1>
+      </fade>
+
+
+      <button @click="handleClick">切换</button>
+    </div>
+    <script>
+      //  封装常用的效果fade
+      Vue.component('fade', {
+        props: ['show'],
+        // 此处 v-if可以得到正常效果, v-show不行
+        // js动画代替css动画, 封装进组件. 比较推荐这种封装, 可以把一个动画完整的封装到一个组件里面
+        template: `
+          <transition
+            @before-enter="handleBeforeEnter"
+            @enter="handEnter" >
+          <slot v-if="show"></slot>
+          </transition>
+        `,
+        methods: {
+          handleBeforeEnter: function (el) {
+            el.style.color = 'red';
+          },
+          handEnter: function (el, done) {
+            setTimeout(()=>{
+              el.style.color = 'green';
+              done();
+            },3000)
+          }
+        }
+      });
+      var vm = new Vue({
+        el: '#root',
+        data: {
+          show: true,
+        },
+        methods: {
+          handleClick: function () {
+            this.show = !this.show;
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>

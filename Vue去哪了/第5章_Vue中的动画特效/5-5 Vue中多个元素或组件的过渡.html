@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>5-5 Vue中多个元素或组件的过渡</title>
+    <script src="../vue.js"></script>
+    <style>
+      .v-enter,.v-leave-to {
+        opacity: 0;
+      }
+      cc
+      .v-enter-active, .v-leave-active{
+        transition: opacity 1s;
+      }
+    </style>
+  </head>
+  <body>
+
+
+    <!--<div id="root">-->
+    <!--  &lt;!&ndash; 先隐藏再显示 &ndash;&gt;-->
+    <!--  <transition mode="out-in">-->
+    <!--  &lt;!&ndash; 先显示再隐藏 &ndash;&gt;-->
+    <!--  &lt;!&ndash;<transition mode="in-out">&ndash;&gt;-->
+    <!--    &lt;!&ndash; vue的两个元素切换的时候, 会尽量复用dom, 如果不希望如此, 分别给个key值 &ndash;&gt;-->
+    <!--    <div v-if="show"  key="hello">Hello World</div>-->
+    <!--    <div v-else       key="bye">Bye World</div>-->
+    <!--  </transition>-->
+    <!--  <button @click="handleClick">切换</button>-->
+    <!--</div>-->
+
+    <!-- 使用组件 -->
+    <div id="root">
+      <transition mode="out-in">
+        <!-- 动态组件 -->
+        <component :is="type" ></component>
+        <!--<hello v-if="show"></hello>-->
+        <!--<bye v-else ></bye>-->
+      </transition>
+      <button @click="handleClick">切换</button>
+    </div>
+
+    <script>
+
+      Vue.component('hello', {
+        template: '<div>Hello World</div>'
+      })
+      Vue.component('bye', {
+        template: '<div>Bye World</div>'
+      })
+
+      var vm = new Vue({
+        el: '#root',
+        data: {
+          // show: true,
+          type: 'hello'
+        },
+        methods: {
+          handleClick: function () {
+            // this.show = !this.show;
+            this.type = (this.type==='hello'? 'bye':'hello')
+          },
+        }
+      });
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>5-1 Vue动画 - Vue中CSS动画原理</title>
+    <script src="../vue.js"></script>
+    <style>
+      /* 合在一起写 */
+      .fadename-enter,
+      .fadename-leave-to {
+        opacity: 0;
+      }
+      .fadename-enter-active,
+      .fadename-leave-active {
+        transition: opacity 1s;
+      }
+
+      /*!* 默认前缀 v--enter *!*/
+      /*!* 第一帧 opacity 0-> 之后帧 opacity 1 *!*/
+      /*.fadename-enter {*/
+      /*  opacity: 0;*/
+      /*}*/
+
+      /*.fadename-enter-active {*/
+      /*  !**/
+      /*  opacity 不透明度*/
+      /*  transition 过渡*/
+      /*  *!*/
+      /*  transition: opacity 3s;*/
+      /*}*/
+
+      /*!* 第一帧 opacity 1-> 之后帧 opacity 0*/
+      /*fadename-leave-to 是第二帧 *!*/
+      /*.fadename-leave-to {*/
+      /*  opacity: 0;*/
+      /*}*/
+
+      /*.fadename-leave-active {*/
+      /*  !**/
+      /*  opacity 不透明度*/
+      /*  transition 过渡*/
+      /*  *!*/
+      /*  transition: opacity 3s;*/
+      /*}*/
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <!-- 显示 -->
+      <!--  第一帧 fadename-enter 存在,fadename-enter-active 存在   -->
+      <!--  第二帧 fadename-enter 移除,fadename-enter-active 变 fadename-enter-to   -->
+      <!--  最后一帧 fadename-enter-to 移除   -->
+
+      <!-- 隐藏 -->
+      <!--  第一帧 fadename-leave 存在,fadename-leave-active 存在   -->
+      <!--  第二帧 fadename-leave 移除,fadename-leave-active 变 fadename-leave-to   -->
+      <!--  最后一帧 fadename-leave-to 移除   -->
+      <transition name="fadename">
+        <div v-if="show">hello world</div>
+      </transition>
+      <button @click="handleClick">切换</button>
+    </div>
+
+
+    <script>
+
+      var vm = new Vue({
+        el: '#root',
+        data: {
+          show: true,
+        },
+        methods: {
+          handleClick: function (){
+            this.show = !this.show;
+          }
+
+        }
+      })
+    </script>
+  </body>
+
+</html>

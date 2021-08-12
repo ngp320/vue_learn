@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>5-3 在Vue中同时使用过渡和动画</title>
+    <script src="../vue.js"></script>
+    <!--  https://animate.style/ 官方 使用其写好的c3特效  -->
+    <link rel="stylesheet" type="text/css" href="../animate.css">
+
+    <style>
+      .fadename-enter,
+      .fadename-leave-to {
+        opacity: 0;
+      }
+
+      .fadename-enter-active,
+      .fadename-leave-active {
+        transition: opacity 5s;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <!-- appear appear-class 使得刷新的时候有效果 -->
+      <!-- 添加 fadename-enter-active 使其有transition动画  -->
+      <!-- 播放时长方式1: type 手动设置 transition 的动画时长为准 -->
+      <!-- 播放时长方式2: :duration="5000" 5s之后动画执行完毕 -->
+      <!-- 播放时长方式3: :duration="{enter:5000, leave:10000}" -->
+      <transition name="fadename"
+                  :duration="{enter:5000, leave:10000}"
+                  type = "transition"
+                  appear
+                  enter-active-class="animate__animated animate__zoomInDown fadename-enter-active"
+                  leave-active-class="animate__animated animate__slideOutDown fadename-leave-active"
+                  appear-active-class="animate__animated animate__zoomInDown"
+      >
+
+        <div v-if="show">hello world</div>
+      </transition>
+      <button @click="handleClick">切换</button>
+    </div>
+
+
+    <script>
+      var vm = new Vue({
+        el: '#root',
+        data: {
+          show: true,
+        },
+        methods: {
+          handleClick: function (){
+            this.show = !this.show;
+          }
+        }
+      })
+    </script>
+  </body>
+
+</html>

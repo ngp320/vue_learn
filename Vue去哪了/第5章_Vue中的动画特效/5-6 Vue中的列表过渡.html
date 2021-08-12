@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>5-6 Vue中的列表过渡</title>
+    <script src="../vue.js"></script>
+    <style>
+      .v-enter,v-leave-to{
+        opacity: 0;
+      }
+      .v-enter-active, v-leave-to-active{
+        transition: opacity 3s;
+      }
+    </style>
+  </head>
+  <body>
+<!-- 用于浏览器测试的Js
+var dom = document.querySelector('#root > button');
+console.log(dom);
+setInterval(function () {
+  dom.click()
+}, 100)
+ -->
+
+    <div id="root">
+      <!-- 加上动画效果, transition-group 相当于在每个div外层加了一个 transition, 就把列表元素的过渡转化为单个元素的过渡了 -->
+      <transition-group>
+        <!-- 不推荐用index作为key值, 原因可参考 https://segmentfault.com/a/1190000019961419 -->
+        <!-- 这里由于item有唯一id, 所以可以用item.id作为key值 -->
+        <div v-for="(item,index) of list" :key="item.id">
+          {{item.title}}
+        </div>
+      </transition-group>
+
+      <button @click="handleBtnClick">Add</button>
+    </div>
+
+    <script>
+      var count = 0;
+
+      var vm = new Vue({
+        el: '#root',
+        data: {
+          list: []
+        },
+        methods: {
+          handleBtnClick: function () {
+            this.list.push({
+              id: count++,
+              title: 'hello world'
+
+            });
+
+          }
+        }
+      });
+    </script>
+  </body>
+
+</html>
