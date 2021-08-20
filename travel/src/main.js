@@ -3,17 +3,24 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import './assets/style/reset.css'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+import 'styles/reset.css'
 
 // 移动端 有一个 1像素边框问题
 // 手机像素比较高, 有一个二倍屏 三倍屏 问题. 可参考:https://www.zhihu.com/question/26195746
 // 为解决这种多倍屏里, 1像素边框会被显示成多像素的问题呢. 我们需要引入一个 1像素边框的解决方案
-import './assets/style/border.css'
+import 'styles/border.css'
 
 // 在某些机型上, click会延迟300ms, 可引入fastclick库解决
 // npm install fastclick --save
 import fastClick from 'fastclick'
+
+// 引入字体
+import 'styles/iconfont.css'
+
 fastClick.attach(document.body)
+Vue.use(VueAwesomeSwiper)
 
 Vue.config.productionTip = false
 
