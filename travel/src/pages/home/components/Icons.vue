@@ -1,6 +1,6 @@
 <template>
   <div class="icons">
-    <swiper>
+    <swiper :options="swiperOption">
       <!-- swiper-slide控制有多少个轮播页面 -->
       <swiper-slide v-for="(page,index) of pages" :key="index">
         <!-- iconList改page,配合swiper-slide, 实现轮播 -->
@@ -20,52 +20,22 @@
 <script>
 export default {
   name: 'HomeIcons',
+  props: {
+    list: Array
+  },
   data () {
     return {
-      iconList: [{
-        id: '0001',
-        imgUrl: 'https://imgs.qunarzz.com/p/p32/1504/46/5a0a9ac552e26d.jpg_216x190_d7288910.jpg',
-        desc: '青岛'
-      }, {
-        id: '0002',
-        imgUrl: 'https://imgs.qunarzz.com/p/p67/1512/a2/0ebfcd965b9391f7.jpg_216x190_cfab0afb.jpg',
-        desc: '三亚'
-      }, {
-        id: '0003',
-        imgUrl: 'https://imgs.qunarzz.com/p/p70/1809/e7/4941057a6aae702.jpg_216x190_1d9c854f.jpg',
-        desc: '丽江'
-      }, {
-        id: '0004',
-        imgUrl: 'https://imgs.qunarzz.com/p/p71/1809/50/b5597c7332bef702.jpg_216x190_34aea61c.jpg',
-        desc: '大理'
-      }, {
-        id: '0005',
-        imgUrl: 'https://imgs.qunarzz.com/p/p32/1504/46/5a0a9ac552e26d.jpg_216x190_d7288910.jpg',
-        desc: '青岛'
-      }, {
-        id: '0006',
-        imgUrl: 'https://imgs.qunarzz.com/p/p67/1512/a2/0ebfcd965b9391f7.jpg_216x190_cfab0afb.jpg',
-        desc: '三亚'
-      }, {
-        id: '0007',
-        imgUrl: 'https://imgs.qunarzz.com/p/p70/1809/e7/4941057a6aae702.jpg_216x190_1d9c854f.jpg',
-        desc: '丽江'
-      }, {
-        id: '0008',
-        imgUrl: 'https://imgs.qunarzz.com/p/p71/1809/50/b5597c7332bef702.jpg_216x190_34aea61c.jpg',
-        desc: '大理1'
-      }, {
-        id: '0009',
-        imgUrl: 'https://imgs.qunarzz.com/p/p77/201302/28/ce5fdca7d3940b0193835fbb.jpg_216x190_c3b1e60e.jpg',
-        desc: '呼伦贝尔'
-      }]
+      swiperOptions: {
+        // 轮播图不要自动滚动
+        autoplay: false
+      }
     }
   },
   computed: {
     // 把9条数据, 按8个一页, 拆成2维数组
     pages () {
       const pages = []
-      this.iconList.forEach((item, index) => {
+      this.list.forEach((item, index) => {
         const page = Math.floor(index / 8)
         if (!pages[page]) {
           pages[page] = []

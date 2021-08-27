@@ -12,8 +12,10 @@
     <!--      <div class="swiper-pagination" slot="pagination"></div>-->
     <!--    </swiper>-->
     <!-- 简化wrapper -->
-    <swiper v-if="swiperList.length>1" :options="swiperOption">
-      <swiper-slide v-for="item of swiperList" :key="item.id">
+    <!--  v-if="list.length" 如果list的值不为空时, 才创建轮播图, 使得默认显示第一个轮播图而不是最后一个 -->
+    <!-- 在模版里面, 尽量避免出现逻辑性的代码, 所以用 computed -->
+    <swiper v-if="showSwiper" :options="swiperOption">
+      <swiper-slide v-for="item of list" :key="item.id">
         <img class="swiper-img" :src="item.imgUrl"/>
       </swiper-slide>
       <!-- 当我们希望, 组件的一部分内容, 可以被父组件定制的时候, 我们就会在这采用slot的形式  -->
@@ -25,23 +27,25 @@
 <script>
 export default {
   name: 'HomeSwiper',
+  props: {
+    list: Array
+  },
   data () {
     return {
       swiperOption: {
+        // 轮播图 自动滚动
+        autoplay: true,
         // 无论左右可以一直拖 的 "轮播"
         loop: true,
         pagination: {
           el: '.swiper-pagination'
         }
-      },
-      swiperList: [{
-        id: '0001',
-        imgUrl: 'https://source.qunarzz.com/site/images/wns/20210818_qunar_dujia_A750x192_6.jpg'
-      }, {
-        id: '0002',
-        imgUrl: 'https://source.qunarzz.com/site/images/wns/20210818_qunar_homepage_dujia_a750x192_4.jpg'
       }
-      ]
+    }
+  },
+  computed: {
+    showSwiper () {
+      return this.list.length
     }
   }
 }

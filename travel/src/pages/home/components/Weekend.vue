@@ -2,7 +2,7 @@
   <div>
     <div class="title">周末去哪儿</div>
     <ul>
-      <li class="item border-buttom" v-for="item of recommendList"
+      <li class="item border-buttom" v-for="item of list"
           :key="item.id">
         <!-- img包裹一层div -->
         <div class="item-img-wrapper">
@@ -20,27 +20,11 @@
 <script>
 export default {
   name: 'HomeWeekend',
+  props: {
+    list: Array
+  },
   data () {
     return {
-      // 更多是通过 浏览器 console里的提示, 来排查错误
-      recommendList: [
-        {
-          id: '0001',
-          imgUrl: 'https://imgs.qunarzz.com/vs_ceph_vs_tts/f18fd7b2-220a-4dce-9ee9-b789f0079e95.jpg_336x320_1dd5ce8a.jpg',
-          title: '横店影视城一日游',
-          desc: '👉主城区接+纯玩线路|广州香港街+秦王宫+明清宫苑+旅行险  ¥186起'
-        }, {
-          id: '0002',
-          imgUrl: 'https://imgs.qunarzz.com/vs_ceph_vs_tts/f18fd7b2-220a-4dce-9ee9-b789f0079e95.jpg_336x320_1dd5ce8a.jpg',
-          title: '横店影视城一日游',
-          desc: '👉主城区接+纯玩线路|广州香港街+秦王宫+明清宫苑+旅行险  ¥186起'
-        }, {
-          id: '0003',
-          imgUrl: 'https://imgs.qunarzz.com/vs_ceph_vs_tts/f18fd7b2-220a-4dce-9ee9-b789f0079e95.jpg_336x320_1dd5ce8a.jpg',
-          title: '横店影视城一日游',
-          desc: '👉主城区接+纯玩线路|广州香港街+秦王宫+明清宫苑+旅行险  ¥186起'
-        }
-      ]
     }
   }
 }
@@ -55,15 +39,18 @@ export default {
   //text-indent 属性规定文本块中首行文本的缩进。
   text-index: .2rem
 
-  .item-img-wrapper
-    overflow: hidden
-    height: 0
-    padding-bottom: 99.2%
-
-.item-img
-  // 通过 .item-img-wrapper 改固定宽高为自适应, 固定宽高比
-  width: 100%
-
+.item-img-wrapper
+  overflow: hidden
+  height: 0
+  padding-bottom: 49.2%
+  .item-img
+    // 通过 .item-img-wrapper 改固定宽高为自适应, 固定宽高比
+    //width: 100%
+    /////////////////// 自己添加部分, css裁剪图片 object-fit:cover 保持原有尺寸比例。但部分内容可能被剪切
+    height: 4rem;
+    width: 100%;
+    object-fit: cover;
+    /////////////////// 详见 https://www.runoob.com/cssref/pr-object-fit.html
 .item-info
   flex: 1
   padding: .1rem
