@@ -16,6 +16,7 @@
       <swiper-slide v-for="item of swiperList" :key="item.id">
         <img class="swiper-img" :src="item.imgUrl"/>
       </swiper-slide>
+      <!-- 当我们希望, 组件的一部分内容, 可以被父组件定制的时候, 我们就会在这采用slot的形式  -->
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
   </div>
