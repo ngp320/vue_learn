@@ -8,10 +8,13 @@
       <span class="iconfont">&#xe63c;</span>
       输入城市/景点/游玩主题
     </div>
-    <div class="header-right">
-      {{this.city}}
-      <span class="iconfont show-city-icon">&#xe65c;</span>
-    </div>
+    <!-- router-link页面跳转 /city路径, 而其在路由里做了配置 -->
+    <router-link to="/city">
+      <div class="header-right">
+        {{this.city}}
+        <span class="iconfont show-city-icon">&#xe65c;</span>
+      </div>
+    </router-link>
   </div>
 
 </template>
@@ -60,7 +63,7 @@ export default {
 @import "~styles/varibles.styl"
 .header
   display: flex
-  line-height: .86rem
+  line-height: $headerHeight
   background: $bgColor
   color: #fff
 
@@ -75,7 +78,7 @@ export default {
   .header-input
     // 字体直接 color设置颜色
     color: #ccc
-    // 84 - 12*2 = 64'
+    // 84 - 12*2 = 64
     height: .64rem
     line-height: .64rem
     margin-left: .2rem
@@ -91,6 +94,7 @@ export default {
     font-size: .3rem
     text-align: center
     margin-left: .1rem
+    color: #fff
 
     .show-city-icon
       margin-left: -.13rem

@@ -7,16 +7,13 @@
   "editor.formatOnSave": true,
   "prettier.requireConfig": true,
   "prettier.configPath": ".prettierrc.yaml",
-
   //缩进###############################
   "prettier.tabWidth": 2, //缩进字节数
   "editor.tabSize": 2,
   "prettier.useTabs": false, //，缩进不使用tab,使用空格
   //缩进###############################
-
-  "prettier.semi": true, //.句尾添加分号
-  "prettier.singleQuote": true, //使用单引号代替双引号
-
+  "prettier.semi": false, //.句尾添加分号
+  "prettier.singleQuote": false, //使用单引号代替双引号
   //其他
   // 打开代码片段填空时的智能感知
   "editor.suggest.snippetsPreventQuickSuggestions": false,
@@ -31,4 +28,28 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  //vue高亮设置
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx",
+    "vue": "html",
+    "vue-html": "html"
+  },
+  // 拼写检查
+  "workbench.editor.enablePreview": false,
+  "cSpell.enableFiletypes": [
+    "javascript",
+    "css",
+    "vue"
+  ],
+  "cSpell.words": [
+    "autoplay",
+    "varibles",
+    "styl"
+  ],
 }
