@@ -25,7 +25,7 @@ export default {
   },
   data () {
     return {
-      swiperOptions: {
+      swiperOption: {
         // 轮播图不要自动滚动
         autoplay: false
       }
