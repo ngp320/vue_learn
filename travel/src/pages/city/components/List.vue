@@ -26,12 +26,16 @@
       <!-- 与下一层key值不重复即可, 只要保证当前层级key值不重复 -->
       <div class="area"
            v-for="(item,key) of cities"
-           :key="key">
+           :key="key"
+           :ref="key">
+        <!-- :ref 不加冒号表示后面是个字符串，否则表示后面是个js表达式。 -->
         <div class="title border-topbottom">{{key}}</div>
         <div class="item-list">
           <div class="item border-bottom"
                v-for="innerItem of item"
-               :key="innerItem.id">{{innerItem.name}}</div>
+               :key="innerItem.id">
+            {{innerItem.name}}
+          </div>
 
         </div>
       </div>
@@ -46,10 +50,27 @@ export default {
   name: 'CityList',
   props: {
     hot: Array,
-    cities: Object
+    cities: Object,
+    letter: String
   },
   mounted () {
     this.scroll = new Bscroll(this.$refs.wrapper)
+  },
+  updated () {
+    this.scroll.refresh()
+  },
+  // vue侦听器, 检查letter的改变, 也就是 Alphabet组件传过来的值 的 改变
+  watch: {
+    letter () {
+      if (this.letter) {
+        // 通过 设置的ref, 获取对应area区域 (div class="area")
+        const element = this.$refs[this.letter][0]
+        // 获得的element 是一个数组, 不是一个dom元素 或者 dom选择器 -解决加[0]-> [this.letter][0]
+        // console.log(element)
+        this.scroll.scrollToElement(element)
+      }
+      // console.log(this.letter)
+    }
   }
 }
 </script>
