@@ -14,7 +14,8 @@ import 'styles/border.css'
 
 // 在某些机型上, click会延迟300ms, 可引入fastclick库解决
 // npm install fastclick --save
-import fastClick from 'fastclick'
+// 最新教程, 用原生功能  src/assets/styles.reset.css 添加 html(touch-action: manipulation; 替代 有小bug的fastclick
+// import fastClick from 'fastclick'
 
 // 引入字体
 import 'styles/iconfont.css'
@@ -22,7 +23,7 @@ import 'styles/iconfont.css'
 // 引入 vuex 的 store
 import store from './store'
 
-fastClick.attach(document.body)
+// fastClick.attach(document.body)
 Vue.use(VueAwesomeSwiper)
 
 Vue.config.productionTip = false
