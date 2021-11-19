@@ -20,6 +20,7 @@ import HomeIcons from './components/Icons'
 import HomeRecommend from './components/Recommend'
 import HomeWeekend from './components/Weekend'
 import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -37,10 +38,13 @@ export default {
       weekendList: []
     }
   },
+  computed: {
+    ...mapState(['city'])
+  },
   methods: {
     getHomeInfo () {
       // 结合 配置项, 自动跳转
-      axios.get('/api/index.json').then(this.getHomeInfoSucc)
+      axios.get('/api/index.json?city=' + this.city).then(this.getHomeInfoSucc)
 
       // 只有 travel/static 下的内容, 可以被外部访问, 故, 用以模拟后端.
       // 此种写法, 上线前需要改动代码, vue提供了 转发机制以解决这个问题. /config/index.js
@@ -64,7 +68,18 @@ export default {
   },
   // 通过生命周期函数 mounted 一次性通过 axios 获取数据, 然后分发到各个组件里
   mounted () {
+    // mounted 初次挂载的时候
+    console.log('mounted')
+    this.lastCity = this.city
     this.getHomeInfo()
+  },
+  activated () {
+    // activated 页面重新显示的时候
+    console.log('activated')
+    if (this.lastCity !== this.city) {
+      this.lastCity = this.city
+      this.getHomeInfo()
+    }
   }
 }
 </script>

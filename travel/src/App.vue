@@ -10,10 +10,14 @@
 
 <template>
   <div id="app">
-<!--    <img src="./assets/logo.png">-->
+    <!--    <img src="./assets/logo.png">-->
     <!-- 页面内容来自 router-view  显示的是当前路由地址所对应的内容 -->
     <!-- 其与src/main.js中的router相关 -->
-    <router-view/>
+    <!--  <router-view/> 外面 包裹一层 keep-alive 防止 切换页面重复请求ajax,  -->
+    <!--  keep-alive 直接缓存了起来, 使用 其时, 会多出一个 activated 生命周期函数 -->
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 

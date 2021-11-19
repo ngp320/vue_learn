@@ -12,7 +12,8 @@
     <router-link to="/city">
       <div class="header-right">
         <!-- 利用 vuex , 替代  {{this.$store.state.city}} 为  this.city  -->
-        {{this.doubleCity}}
+        <!-- {{this.doubleCity}} 此处可以演示 mapGetters效果 -->
+        {{this.city}}
         <span class="iconfont show-city-icon">&#xe65c;</span>
       </div>
     </router-link>
