@@ -11,7 +11,8 @@
     <!-- router-link页面跳转 /city路径, 而其在路由里做了配置 -->
     <router-link to="/city">
       <div class="header-right">
-        {{this.city}}
+        <!-- 利用 vuex , 替代  {{this.$store.state.city}} 为  this.city  -->
+        {{this.doubleCity}}
         <span class="iconfont show-city-icon">&#xe65c;</span>
       </div>
     </router-link>
@@ -20,11 +21,14 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
 export default {
   name: 'HomeHeader',
-  props: {
-    // city 必须是 string类型
-    city: String
+  computed: {
+    // ... 展开运算符
+    // city 映射到 city计算属性当中
+    ...mapState(['city']),
+    ...mapGetters(['doubleCity'])
   }
 }
 </script>
@@ -60,44 +64,53 @@ export default {
 <style lang="stylus" scoped>
 // ~@ 的~, 这种写法其实是webpack中的一个配置。这里用~符号, 然后就会去 webpack.base.conf.js的 alias 配置中找相应的值。
 // 修改webpack配置项, 需要重启服务器
-@import "~styles/varibles.styl"
-.header
-  display: flex
-  line-height: $headerHeight
-  background: $bgColor
-  color: #fff
+@import '~styles/varibles.styl';
 
-  .header-left
-    width: .64rem
-    float: left
+.header {
+  display: flex;
+  line-height: $headerHeight;
+  background: $bgColor;
+  color: #fff;
 
-    .back-icon
-      text-align: center
-      font-size: .5rem
+  .header-left {
+    width: 0.64rem;
+    float: left;
 
-  .header-input
+    .back-icon {
+      text-align: center;
+      font-size: 0.5rem;
+    }
+  }
+
+  .header-input {
     // 字体直接 color设置颜色
-    color: #ccc
+    color: #ccc;
     // 84 - 12*2 = 64
-    height: .64rem
-    line-height: .64rem
-    margin-left: .2rem
-    margin-top: .12rem
-    padding-left: .2rem
-    background: #fff
-    border-radius: .1rem
-    flex: 1
+    height: 0.64rem;
+    line-height: 0.64rem;
+    margin-left: 0.2rem;
+    margin-top: 0.12rem;
+    padding-left: 0.2rem;
+    background: #fff;
+    border-radius: 0.1rem;
+    flex: 1;
+  }
 
-  .header-right
-    float: right
-    width: 1.24rem
-    font-size: .3rem
-    text-align: center
-    margin-left: .1rem
-    color: #fff
+  .header-right {
+    float: right;
+    // width -->  min-width + padding (设置最小宽度, 以适应4字城市)
+    min-width: 1.04rem;
+    padding: 0.1rem;
+    font-size: 0.3rem;
+    text-align: center;
+    margin-left: 0.1rem;
+    color: #fff;
 
-    .show-city-icon
-      margin-left: -.13rem
-      font-size: .4rem
+    .show-city-icon {
+      margin-left: -0.13rem;
+      font-size: 0.4rem;
+    }
+  }
+}
 </style>
 <!-- scoped只对当前组件有效 -->

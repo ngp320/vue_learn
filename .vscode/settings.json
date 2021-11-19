@@ -50,11 +50,13 @@
     "axios",
     "Bscroll",
     "styl",
+    "swiper",
     "topbottom",
     "touchend",
     "touchmove",
     "touchstart",
-    "varibles"
+    "varibles",
+    "vuex"
   ],
 
   

@@ -1,10 +1,10 @@
 <template>
   <div>
-<!--    <div class="home">Home</div>-->
-<!--    &lt;!&ndash; vue中, 用router-link而不是a标签, 切换页面 &ndash;&gt;-->
-<!--    <router-link to="/list" class="home">列表页</router-link>-->
-<!--    hello world-->
-    <home-header :city="city"></home-header>
+    <!--    <div class="home">Home</div>-->
+    <!--    &lt;!&ndash; vue中, 用router-link而不是a标签, 切换页面 &ndash;&gt;-->
+    <!--    <router-link to="/list" class="home">列表页</router-link>-->
+    <!--    hello world-->
+    <home-header></home-header>
     <home-swiper :list="swiperList"></home-swiper>
     <home-icons :list="iconList"></home-icons>
     <home-recommend :list="recommendList"></home-recommend>
@@ -31,7 +31,6 @@ export default {
   },
   data () {
     return {
-      city: '',
       swiperList: [],
       iconList: [],
       recommendList: [],
@@ -41,8 +40,7 @@ export default {
   methods: {
     getHomeInfo () {
       // 结合 配置项, 自动跳转
-      axios.get('/api/index.json')
-        .then(this.getHomeInfoSucc)
+      axios.get('/api/index.json').then(this.getHomeInfoSucc)
 
       // 只有 travel/static 下的内容, 可以被外部访问, 故, 用以模拟后端.
       // 此种写法, 上线前需要改动代码, vue提供了 转发机制以解决这个问题. /config/index.js
@@ -56,7 +54,6 @@ export default {
       // 如果后端返回正确, 且 data有内容
       if (res.ret && res.data) {
         const data = res.data
-        this.city = data.city
         this.swiperList = data.swiperList
         this.iconList = data.iconList
         this.recommendList = data.recommendList

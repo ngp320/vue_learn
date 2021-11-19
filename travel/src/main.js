@@ -19,6 +19,9 @@ import fastClick from 'fastclick'
 // 引入字体
 import 'styles/iconfont.css'
 
+// 引入 vuex 的 store
+import store from './store'
+
 fastClick.attach(document.body)
 Vue.use(VueAwesomeSwiper)
 
@@ -30,6 +33,7 @@ new Vue({
   el: '#app',
   // es6里面, 键和值相等可以省略一部分内容, 实际为 router: router, 点击 import router 可知实际
   router,
+  store,
   // components: {App},是 es6写法, 省略了一部分, components: {App: App}
   components: {App},
   // template 模版把App局部组件显示在页面之上. App是从当前目录下导入进来的 import App from './App'

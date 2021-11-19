@@ -15,24 +15,27 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '~styles/varibles.styl'
-  .header
-    position: relative
-    overflow: hidden
-    height: $headerHeight
-    line-height: $headerHeight
-    text-align: center
-    color: #fff
-    background: $bgColor
-    font-size: .32rem
+@import '~styles/varibles.styl';
 
-    .header-back
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: .64rem
-      text-align: center
-      // 同 Home.vue .4rem
-      font-size: .4rem
-      color: #fff
- </style>
+.header {
+  position: relative;
+  overflow: hidden;
+  height: $headerHeight;
+  line-height: $headerHeight;
+  text-align: center;
+  color: #fff;
+  background: $bgColor;
+  font-size: 0.32rem;
+
+  .header-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.64rem;
+    text-align: center;
+    // 同 Home.vue .4rem
+    font-size: 0.4rem;
+    color: #fff;
+  }
+}
+</style>

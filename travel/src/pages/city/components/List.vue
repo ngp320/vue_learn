@@ -6,7 +6,8 @@
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
           <div class="button-wrapper">
-            <div class="button">北京</div>
+            <!-- 利用 vuex 简化 this.$store.state.city为 this.currentCity -->
+            <div class="button">{{this.currentCity}}</div>
           </div>
         </div>
       </div>
@@ -17,7 +18,8 @@
           Vue 2.2.0+的版本里，当在组件中使用v-for时，key是必须的 -->
           <div class="button-wrapper"
                v-for="item of hot"
-               :key="item.id">
+               :key="item.id"
+               @click="handleCityClick(item.name)">
             <div class="button">{{item.name}}</div>
           </div>
         </div>
@@ -33,7 +35,8 @@
         <div class="item-list">
           <div class="item border-bottom"
                v-for="innerItem of item"
-               :key="innerItem.id">
+               :key="innerItem.id"
+               @click="handleCityClick(innerItem.name)">
             {{innerItem.name}}
           </div>
 
@@ -46,6 +49,7 @@
 
 <script>
 import Bscroll from 'better-scroll'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'CityList',
   props: {
@@ -53,11 +57,20 @@ export default {
     cities: Object,
     letter: String
   },
-  mounted () {
-    this.scroll = new Bscroll(this.$refs.wrapper)
+  computed: {
+    ...mapState({
+      currentCity: 'city'
+    })
   },
-  updated () {
-    this.scroll.refresh()
+  methods: {
+    handleCityClick (city) {
+      // vuex 简化 this.$store.commit('changeCity', city) -->  this.changeCity(city)
+      // this.$store.commit('changeCity', city)
+      this.changeCity(city)
+      // console.log(city)
+      this.$router.push('/')
+    },
+    ...mapMutations(['changeCity'])
   },
   // vue侦听器, 检查letter的改变, 也就是 Alphabet组件传过来的值 的 改变
   watch: {
@@ -71,6 +84,15 @@ export default {
       }
       // console.log(this.letter)
     }
+  },
+  mounted () {
+    //   click: true 解决 bscroll 和 handleCityClick(city) {console.log(city)} 冲突问题
+    this.scroll = new Bscroll(this.$refs.wrapper, {
+      click: true
+    })
+  },
+  updated () {
+    this.scroll.refresh()
   }
 }
 </script>
