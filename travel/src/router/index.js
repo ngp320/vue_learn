@@ -6,6 +6,7 @@ import Router from 'vue-router'
 // 不写.vue后缀, vue也会自动帮你去找
 import Home from '@/pages/home/Home'
 import City from '@/pages/city/City'
+import Detail from '@/pages/detail/Detail'
 
 Vue.use(Router)
 // 一组路由的配置项
@@ -20,6 +21,11 @@ export default new Router({
       path: '/city',
       name: 'City',
       component: City
+    }, {
+      // 动态路由
+      path: '/detail/:id',
+      name: 'Detail',
+      component: Detail
     }
   ]
 })
