@@ -16,11 +16,13 @@
     <!-- 在模版里面, 尽量避免出现逻辑性的代码, 所以用 computed -->
     <swiper v-if="showSwiper"
             :options="swiperOption">
+      <!-- slide 循环 -->
       <swiper-slide v-for="item of list"
                     :key="item.id">
         <img class="swiper-img"
              :src="item.imgUrl" />
       </swiper-slide>
+      <!-- pagination分页 -->
       <!-- 当我们希望, 组件的一部分内容, 可以被父组件定制的时候, 我们就会在这采用slot的形式  -->
       <div class="swiper-pagination"
            slot="pagination"></div>
@@ -39,11 +41,12 @@ export default {
       swiperOption: {
         // 轮播图 自动滚动
         // autoplay: --> 3000可以, auto 不行 , 加了 keep-alive以后
-        autoplay: 3000,
+        autoplay: 100,
         // 无论左右可以一直拖 的 "轮播"
         loop: true,
         pagination: {
-          el: '.swiper-pagination'
+          el: '.swiper-pagination',
+          type: 'bullets'
         }
       }
     }

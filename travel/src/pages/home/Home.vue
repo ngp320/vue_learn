@@ -69,13 +69,13 @@ export default {
   // 通过生命周期函数 mounted 一次性通过 axios 获取数据, 然后分发到各个组件里
   mounted () {
     // mounted 初次挂载的时候
-    console.log('mounted')
+    // console.log('mounted')
     this.lastCity = this.city
     this.getHomeInfo()
   },
   activated () {
     // activated 页面重新显示的时候
-    console.log('activated')
+    // console.log('activated')
     if (this.lastCity !== this.city) {
       this.lastCity = this.city
       this.getHomeInfo()
