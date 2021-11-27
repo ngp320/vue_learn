@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="banner"
          @click="handleBannerClick">
       <img class="banner-img"
