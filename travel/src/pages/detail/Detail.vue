@@ -25,6 +25,15 @@ export default {
     return {
       list: [
         {
+          title: '园区主体',
+          children: [
+            {
+              title: ' 免费 ',
+              price: ''
+            }
+          ]
+        },
+        {
           title: '成人票',
           children: [
             {
