@@ -106,6 +106,7 @@ export default {
     text-align: center;
     margin-left: 0.1rem;
     color: #fff;
+    line-height: 0.64rem;
 
     .show-city-icon {
       margin-left: -0.13rem;

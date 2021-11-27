@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     handleScroll () {
-      console.log('handleScroll')
+      // console.log('handleScroll')
       const top = document.documentElement.scrollTop
       if (top > 60) {
         let opacity = top / 140
@@ -76,6 +76,8 @@ export default {
 }
 
 .header-fixed {
+  // 小于 轮播组件  z-index:99
+  z-index: 2;
   position: fixed;
   top: 0;
   left: 0;

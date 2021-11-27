@@ -34,12 +34,12 @@ export default {
     return {
       swiperOption: {
         // 不知道为什么 这里是 swiper版本是 swiper5 即 swiper@5.4.5,
+        // observer  observeParents 当监听到 本元素或者父级元素变化时 自我刷新一次
+        observer: true,
+        observeParents: true,
         pagination: {
           el: '.swiper-pagination',
-          type: 'fraction',
-          // observer  observeParents 当监听到 本元素或者父级元素变化时 自我刷新一次
-          observer: true,
-          observeParents: true
+          type: 'fraction'
         }
       }
     }
