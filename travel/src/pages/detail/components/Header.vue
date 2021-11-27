@@ -30,6 +30,7 @@ export default {
   },
   methods: {
     handleScroll () {
+      console.log('handleScroll')
       const top = document.documentElement.scrollTop
       if (top > 60) {
         let opacity = top / 140
@@ -45,7 +46,11 @@ export default {
     }
   },
   activated () {
+    // window全局对象的事件绑定, 实际上会影响 其他组件
     window.addEventListener('scroll', this.handleScroll)
+  },
+  deactivated () {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
