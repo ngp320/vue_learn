@@ -38,7 +38,7 @@ export default {
     .item-title-icon {
       float: left;
       position: relative;
-      left: 0.1rem;
+      left: 0.05rem;
       top: 0.1rem;
       display: inline-block;
       width: 0.36rem;

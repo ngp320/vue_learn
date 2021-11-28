@@ -15,7 +15,8 @@
     <!-- 其与src/main.js中的router相关 -->
     <!--  <router-view/> 外面 包裹一层 keep-alive 防止 切换页面重复请求ajax,  -->
     <!--  keep-alive 直接缓存了起来, 使用 其时, 会多出一个 activated 生命周期函数 -->
-    <keep-alive>
+    <!-- exclude 排除这个页面的 keep-alive缓存, 相比于activated, 会影响其子组件 -->
+    <keep-alive exclude="Detail">
       <router-view />
     </keep-alive>
   </div>

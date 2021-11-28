@@ -3,17 +3,17 @@
     <div class="banner"
          @click="handleBannerClick">
       <img class="banner-img"
-           src="https://imgs.qunarzz.com/p/tts1/1905/65/7d1a87c3c455ed02.jpg_750x440_ad50499b.jpg">
+           :src="bannerImg">
       <div class="banner-info">
         <div class="banner-title">出发地:杭州 神威旅游 </div>
         <div class="banner-number">
           <span class="iconfont banner-icon">&#xeb4f;</span>
-          5
+          {{ this.bannerImgs.length }}
         </div>
       </div>
     </div>
     <!-- common-gallary 一开始是隐藏的, 轮播图计算宽度会有问题, swiper增加参数...解决  -->
-    <common-gallary :imgs="imgs"
+    <common-gallary :imgs="bannerImgs"
                     v-show="showGallary"
                     @close="handleGallaryClose"></common-gallary>
   </div>
@@ -23,6 +23,12 @@
 import CommonGallary from 'common/gallary/Gallary'
 export default {
   name: 'DetailBanner',
+  props: {
+    sightName: String,
+    bannerImg: String,
+    bannerImgs: Array,
+    list: Array
+  },
   data () {
     return {
       showGallary: false,

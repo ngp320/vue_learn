@@ -45,6 +45,7 @@ export default {
       console.log()
     }
   },
+  // 由于 App.vue exclude="Detail" 影响了 次子组件, 所以 放入 mounted
   activated () {
     // window全局对象的事件绑定, 实际上会影响 其他组件
     window.addEventListener('scroll', this.handleScroll)
